@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Weather App</h1>
+    <nav>
+      <!-- 'request.url.path' gives the current path -->
+      <a href="/"
+         class="nav-link {% if request.url.path == '/' %}active{% endif %}">
+        Home
+      </a>
+      {% if user %}
+        <a href="/weather-ui"
+           class="nav-link {% if request.url.path == '/weather-ui' %}active{% endif %}">
+          Weather
+        </a>
+      
+        <a href="/logout" class="nav-link">Logout</a>
+      {% else %}
+        <a href="/register"
+           class="nav-link {% if request.url.path == '/register' %}active{% endif %}">
+          Register
+        </a>
+        <a href="/login"
+           class="nav-link {% if request.url.path == '/login' %}active{% endif %}">
+          Login
+        </a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {% block body %}{% endblock %}
+  </main>
+</body>
+</html>

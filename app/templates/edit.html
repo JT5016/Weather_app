@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="form-container">
+  <form action="/history/{{ entry.id }}/edit" method="post" class="form">
+    <h2>Edit Entry #{{ entry.id }}</h2>
+
+    <label for="location">Location</label>
+    <input
+      id="location"
+      name="location"
+      type="text"
+      value="{{ entry.location }}"
+      class="input-field"
+      required
+    />
+
+    <label for="start_date">Start Date</label>
+    <input
+      id="start_date"
+      name="start_date"
+      type="date"
+      value="{{ entry.start_date.strftime('%Y-%m-%d') if entry.start_date else '' }}"
+      class="input-field"
+    />
+
+    <label for="end_date">End Date</label>
+    <input
+      id="end_date"
+      name="end_date"
+      type="date"
+      value="{{ entry.end_date.strftime('%Y-%m-%d') if entry.end_date else '' }}"
+      class="input-field"
+    />
+
+    <button type="submit" class="btn">Save</button>
+  </form>
+</div>
+{% endblock %}

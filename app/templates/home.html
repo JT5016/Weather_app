@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h2 class="section-title">Your Saved Weather</h2>
+
+  {% if entries %}
+    <div class="home-container">
+      {% for e in entries %}
+        <div class="saved-weather-card" data-id="{{ e.id }}">
+
+          {# — Current Weather Card — #}
+          <div class="current-card">
+            <img
+              src="http://openweathermap.org/img/wn/{{ e.icon }}@2x.png"
+              alt="{{ e.description }}"
+            />
+            <div class="current-info">
+              <h3>{{ e.city }}</h3>
+              <p class="temp">{{ e.temp }}°F</p>
+              <p class="humidity">Humidity: {{ e.humidity }}%</p>
+              <p class="desc">{{ e.description }}</p>
+            </div>
+          </div>
+
+          {# — Actions: Edit, Delete, Forecast, Sun — #}
+          <div class="card-actions">
+            <a href="/history/{{ e.id }}/edit" class="btn-link">Edit</a>
+            <form action="/history/{{ e.id }}/delete" method="post" class="inline-form">
+              <button type="submit">Delete</button>
+            </form>
+            <button class="btn-inline forecast-btn" data-id="{{ e.id }}">Forecast</button>
+            <button class="btn-inline sun-btn"      data-id="{{ e.id }}">☀️</button>
+          </div>
+
+          {# — Placeholder for injected forecast strip — #}
+          <div class="forecast-container"></div>
+
+          {# — Placeholder for injected sunrise/sunset info — #}
+          <div class="sun-container"></div>
+
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="no-data">
+      You haven’t saved any weather yet.
+      <a href="/weather-ui" class="btn-link">Fetch some weather</a>.
+    </p>
+  {% endif %}
+{% endblock %}

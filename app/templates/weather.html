@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="weather-container">
+  <form id="weatherForm" class="form">
+    <h2>Get Weather</h2>
+    <input name="location"    placeholder="City or ZIP" class="input-field" />
+    <div class="date-group">
+      <input name="start_date" type="date"    class="input-field" />
+      <input name="end_date"   type="date"    class="input-field" />
+    </div>
+    <button type="submit"     class="btn">Fetch</button>
+  </form>
+
+  <div id="weatherResult" class="weather-result">
+    <!-- JS will inject the current + forecast cards here -->
+  </div>
+</div>
+{% endblock %}
